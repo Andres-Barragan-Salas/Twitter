@@ -62,12 +62,13 @@
     
     Tweet *tweet = self.tweets[indexPath.row];
     
-    cell.createdAtLabel.text = tweet.createdAtString;
-    cell.contentTextLabel.text = tweet.text;
-    cell.favoriteCountLabel.text = [@(tweet.favoriteCount) stringValue];
-    cell.retweetCountLabel.text = [@(tweet.retweetCount) stringValue];
-    cell.userNameLabel.text = tweet.user.name;
-    cell.userScreenNameLabel.text = tweet.user.screenName;
+    [cell initCellWithTweet:tweet]; 
+//    cell.createdAtLabel.text = tweet.createdAtString;
+//    cell.contentTextLabel.text = tweet.text;
+//    cell.favoriteCountLabel.text = [@(tweet.favoriteCount) stringValue];
+//    cell.retweetCountLabel.text = [@(tweet.retweetCount) stringValue];
+//    cell.userNameLabel.text = tweet.user.name;
+//    cell.userScreenNameLabel.text = tweet.user.screenName;
     
     return cell; 
 }
