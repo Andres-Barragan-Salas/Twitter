@@ -24,13 +24,8 @@
     self.retweetCountLabel.text = [@(tweet.retweetCount) stringValue];
     self.userNameLabel.text = tweet.user.name;
     self.userScreenNameLabel.text = tweet.user.screenName;
-    
-    if(self.tweet.favorited) {
-        self.favoriteButton.selected = YES;
-    }
-    if(self.tweet.retweeted) {
-        self.retweetButton.selected = YES;
-    }
+    self.favoriteButton.selected = self.tweet.favorited;
+    self.retweetButton.selected = self.tweet.retweeted;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -63,6 +58,32 @@
     }
     
     self.favoriteCountLabel.text = [@(self.tweet.favoriteCount) stringValue];
+}
+
+- (IBAction)didTapRetweet:(id)sender {
+    [[APIManager shared] retweet:self.tweet remove:(BOOL *)self.tweet.retweeted completion:^(Tweet *tweet, NSError *error) {
+             if(tweet){
+                  NSLog(@"Successfully retweeted/unretweeted the following Tweet: %@", tweet.text);
+             }
+             else{
+                  NSLog(@"Error retweeting/unretweeting tweet: %@", error.localizedDescription);
+             }
+    }];
+    
+    if(self.tweet.retweeted) {
+        self.tweet.retweeted = NO;
+        self.tweet.retweetCount -= 1;
+        
+        self.retweetButton.selected = NO;
+    }
+    else {
+        self.tweet.retweeted = YES;
+        self.tweet.retweetCount += 1;
+        
+        self.retweetButton.selected = YES;
+    }
+    
+    self.retweetCountLabel.text = [@(self.tweet.retweetCount) stringValue];
 }
 
 @end

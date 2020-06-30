@@ -90,4 +90,23 @@ static NSString * const consumerSecret = @"pXUaMjlu6wtxRkWVercGvyKszvtOyUaYZlBya
     }];
 }
 
+- (void)retweet:(Tweet *)tweet remove:(BOOL *)toRemove completion:(void (^)(Tweet *, NSError *))completion{
+    NSString *urlString;
+    
+    if(toRemove){
+        urlString = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", tweet.idStr];
+    }
+    else {
+        urlString = [NSString stringWithFormat:@"1.1/statuses/unretweet/%@.json", tweet.idStr];
+    }
+    
+    NSDictionary *parameters = @{@"id": tweet.idStr};
+    [self POST:urlString parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, NSDictionary *  _Nullable tweetDictionary) {
+        Tweet *tweet = [[Tweet alloc]initWithDictionary:tweetDictionary];
+        completion(tweet, nil);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        completion(nil, error);
+    }];
+}
+
 @end
