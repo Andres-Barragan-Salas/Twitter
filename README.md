@@ -6,9 +6,9 @@ The starter project can be found in the `starter-project` tag. Download and run 
 
 ### Notes
 https://paper.dropbox.com/doc/Twitter--ADuVCVvwop_njSNAbUU96Q2VAQ-g255BPX3K4X7G0reYOWCI
-# Project 3 - *Name of App Here*
+# Project 3 - *Tweets-A*
 
-**Name of your app** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
+**Tweets-A** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
 Time spent: **X** hours spent in total
 
@@ -16,12 +16,12 @@ Time spent: **X** hours spent in total
 
 The following **required** functionality is completed:
 
-- [ ] User sees app icon in home screen and styled launch screen
-- [ ] User can sign in using OAuth login flow
+- [x] User sees app icon in home screen and styled launch screen
+- [x] User can sign in using OAuth login flow
 - [ ] User can Logout
-- [ ] User can view last 20 tweets from their home timeline
+- [x] User can view last 20 tweets from their home timeline
 - [ ] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.
-- [ ] User can pull to refresh.
+- [x] User can pull to refresh.
 - [ ] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet.
 - [ ] User can compose a new tweet by tapping on a compose button.
 - [ ] Using AutoLayout, the Tweet cell should adjust it's layout for iPhone 7, Plus and SE device sizes as well as accommodate device rotation.
@@ -77,7 +77,7 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2020] [Andres Barragan]
 
     Licensed under the Apache License, Version 2.0 (the License);
     you may not use this file except in compliance with the License.
