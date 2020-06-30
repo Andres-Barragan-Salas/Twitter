@@ -8,6 +8,7 @@
 
 #import "TweetCell.h"
 #import "APIManager.h"
+#import "UIImageView+AFNetworking.h"
 
 @implementation TweetCell
 
@@ -26,6 +27,23 @@
     self.userScreenNameLabel.text = tweet.user.screenName;
     self.favoriteButton.selected = self.tweet.favorited;
     self.retweetButton.selected = self.tweet.retweeted;
+    
+    NSURLRequest *profileImageRequest = [NSURLRequest requestWithURL:tweet.user.profileImage];
+    [self.profileImageView setImageWithURLRequest:profileImageRequest placeholderImage:nil
+    success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
+        if (imageResponse) {
+            self.profileImageView.alpha = 0.0;
+            self.profileImageView.image = image;
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                self.profileImageView.alpha = 1.0;
+            }];
+        }
+        else {
+            self.profileImageView.image = image;
+        }
+    }
+    failure:NULL];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

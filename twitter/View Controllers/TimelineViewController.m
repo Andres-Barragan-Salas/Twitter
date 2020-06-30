@@ -11,6 +11,7 @@
 #import "Tweet.h"
 #import "TweetCell.h"
 #import "ComposeViewController.h"
+#import "SingleTweetViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 
@@ -95,9 +96,19 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    composeController.delegate = self;
+    if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    }
+    if ([sender isKindOfClass:[TweetCell class]]) {
+        TweetCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        NSDictionary *tweet = self.tweets[indexPath.row];
+        
+        SingleTweetViewController *singleTweetViewController = [segue destinationViewController];
+        singleTweetViewController.tweet = tweet;
+    }
 }
 
 
