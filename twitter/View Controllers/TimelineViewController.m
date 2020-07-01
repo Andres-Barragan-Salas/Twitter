@@ -25,6 +25,12 @@
 
 @implementation TimelineViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [self getTimeline];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -43,10 +49,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.tweets.count;
-}
-
 - (void)getTimeline {
         [[APIManager shared] getHomeTimelineWithCompletion:^(NSArray *tweets, NSError *error) {
             if (tweets) {
@@ -60,18 +62,16 @@
         }];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.tweets.count;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TweetCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TweetCell"];
     
     Tweet *tweet = self.tweets[indexPath.row];
     
-    [cell initCellWithTweet:tweet]; 
-//    cell.createdAtLabel.text = tweet.createdAtString;
-//    cell.contentTextLabel.text = tweet.text;
-//    cell.favoriteCountLabel.text = [@(tweet.favoriteCount) stringValue];
-//    cell.retweetCountLabel.text = [@(tweet.retweetCount) stringValue];
-//    cell.userNameLabel.text = tweet.user.name;
-//    cell.userScreenNameLabel.text = tweet.user.screenName;
+    [cell initCellWithTweet:tweet];
     
     return cell; 
 }
