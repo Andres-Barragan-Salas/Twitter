@@ -38,6 +38,8 @@
     self.favoriteButton.selected = self.tweet.favorited;
     self.retweetButton.selected = self.tweet.retweeted;
     
+    // Profile image request
+    self.profileImageView.image = [UIImage imageNamed:@"profile-Icon"];
     NSURLRequest *profileImageRequest = [NSURLRequest requestWithURL:self.tweet.user.profileImage];
     [self.profileImageView setImageWithURLRequest:profileImageRequest placeholderImage:nil
     success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {

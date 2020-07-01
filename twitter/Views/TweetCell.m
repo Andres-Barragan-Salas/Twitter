@@ -19,7 +19,7 @@
 
 - (void)initCellWithTweet:(Tweet *)tweet {
     self.tweet = tweet;
-    self.createdAtLabel.text = tweet.createdAtString;
+    self.createdAtLabel.text = [NSString stringWithFormat:@"·  %@", tweet.timeAgoString];
     self.contentTextLabel.text = tweet.text;
     self.favoriteCountLabel.text = [@(tweet.favoriteCount) stringValue];
     self.retweetCountLabel.text = [@(tweet.retweetCount) stringValue];
@@ -28,6 +28,8 @@
     self.favoriteButton.selected = self.tweet.favorited;
     self.retweetButton.selected = self.tweet.retweeted;
     
+    // Profile image request
+    self.profileImageView.image = [UIImage imageNamed:@"profile-Icon"];
     NSURLRequest *profileImageRequest = [NSURLRequest requestWithURL:tweet.user.profileImage];
     [self.profileImageView setImageWithURLRequest:profileImageRequest placeholderImage:nil
     success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
