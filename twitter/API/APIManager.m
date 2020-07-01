@@ -94,10 +94,10 @@ static NSString * const consumerSecret = @"pXUaMjlu6wtxRkWVercGvyKszvtOyUaYZlBya
     NSString *urlString;
     
     if(toRemove){
-        urlString = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", tweet.idStr];
+        urlString = [NSString stringWithFormat:@"1.1/statuses/unretweet/%@.json", tweet.idStr];
     }
     else {
-        urlString = [NSString stringWithFormat:@"1.1/statuses/unretweet/%@.json", tweet.idStr];
+        urlString = [NSString stringWithFormat:@"1.1/statuses/retweet/%@.json", tweet.idStr];
     }
     
     NSDictionary *parameters = @{@"id": tweet.idStr};

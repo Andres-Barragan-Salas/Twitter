@@ -26,6 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 // For Retweets
 @property (nonatomic, strong) User *retweetedByUser;  // user who retweeted if tweet is retweet
+@property (nonatomic, strong) Tweet *current_user_retweet;
 
 // MARK: Methods
 - (instancetype)initWithDictionary:(NSDictionary *)dictionary;

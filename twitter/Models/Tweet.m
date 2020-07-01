@@ -53,6 +53,11 @@
         else {
             self.timeAgoString = date.shortTimeAgoSinceNow;
         }
+        
+        // Retweet status
+        if (dictionary[@"current_user_retweet"]) {
+            self.current_user_retweet = [[Tweet alloc] initWithDictionary:dictionary[@"current_user_retweet"]];
+        }
     }
     return self;
 }
