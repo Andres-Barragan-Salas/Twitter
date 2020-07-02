@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *favoriteCountLabel;
 @property (weak, nonatomic) IBOutlet UIButton *retweetButton;
 @property (weak, nonatomic) IBOutlet UIButton *favoriteButton;
+@property (weak, nonatomic) IBOutlet UIImageView *mediaImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mediaConstraint;
 
 @end
 
@@ -60,6 +62,34 @@
         }
     }
     failure:NULL];
+    
+    // Media image request
+    self.mediaImageView.image = nil;
+    if (self.tweet.mediaURL != nil){
+        [self.mediaConstraint setActive:YES];
+        [self.mediaImageView setHidden:NO];
+        self.mediaImageView.layer.cornerRadius = 10;
+        NSURLRequest *mediaImageRequest = [NSURLRequest requestWithURL:self.tweet.mediaURL];
+        [self.profileImageView setImageWithURLRequest:mediaImageRequest placeholderImage:nil
+        success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
+            if (imageResponse) {
+                self.mediaImageView.alpha = 0.0;
+                self.mediaImageView.image = image;
+
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.mediaImageView.alpha = 1.0;
+                }];
+            }
+            else {
+                self.mediaImageView.image = image;
+            }
+        }
+        failure:NULL];
+    }
+    else {
+        [self.mediaConstraint setActive:NO];
+        [self.mediaImageView setHidden:YES];
+    }
 }
 
 - (IBAction)didTapFavorite:(id)sender {
