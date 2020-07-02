@@ -29,6 +29,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIImageView *retweetImage;
 @property (weak, nonatomic) IBOutlet UILabel *retweetUser;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *retweetConstraint;
+@property (weak, nonatomic) IBOutlet UIImageView *mediaImageView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *mediaConstraint;
 
 - (void)initCellWithTweet:(Tweet *)tweet;
 

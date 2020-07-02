@@ -28,8 +28,6 @@
         [self.retweetImage setHidden:NO];
         [self.retweetUser setHidden:NO];
         [self.retweetConstraint setActive:YES];
-//        [self.retweetConstraint setPriority:1000];
-//        [self.cellConstraint setPriority:250];
         self.retweetUser.text = [NSString stringWithFormat:@"%@ Retweeted", tweet.retweetedByUser.name];
     }
     else {
@@ -76,6 +74,34 @@
         }
     }
     failure:NULL];
+    
+    // Media image request
+    self.mediaImageView.image = nil;
+    if (self.tweet.mediaURL != nil){
+        [self.mediaConstraint setActive:YES];
+        [self.mediaImageView setHidden:NO];
+        self.mediaImageView.layer.cornerRadius = 10;
+        NSURLRequest *mediaImageRequest = [NSURLRequest requestWithURL:tweet.mediaURL];
+        [self.profileImageView setImageWithURLRequest:mediaImageRequest placeholderImage:nil
+        success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
+            if (imageResponse) {
+                self.mediaImageView.alpha = 0.0;
+                self.mediaImageView.image = image;
+
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.mediaImageView.alpha = 1.0;
+                }];
+            }
+            else {
+                self.mediaImageView.image = image;
+            }
+        }
+        failure:NULL];
+    }
+    else {
+        [self.mediaConstraint setActive:NO];
+        [self.mediaImageView setHidden:YES];
+    }
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

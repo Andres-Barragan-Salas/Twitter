@@ -53,6 +53,9 @@
         else {
             self.timeAgoString = date.shortTimeAgoSinceNow;
         }
+        
+        // Media
+        self.mediaURL = [NSURL URLWithString:dictionary[@"entities"][@"media"][0][@"media_url_https"]];
     }
     return self;
 }
