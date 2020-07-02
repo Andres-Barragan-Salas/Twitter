@@ -7,12 +7,14 @@
 //
 
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
+#import "SingleTweetViewController.h"
 #import "UserViewController.h"
 #import "TweetCell.h"
 #import "APIManager.h"
 #import "User.h"
 
-@interface UserViewController () <UITableViewDataSource, UITableViewDelegate>
+@interface UserViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -50,6 +52,7 @@
             self.followersCount.text = [self.user.followersCount stringValue];
             
             // Profile image request
+            self.profileImageView.layer.cornerRadius = 10;
             self.profileImageView.image = [UIImage imageNamed:@"profile-Icon"];
             NSURLRequest *profileImageRequest = [NSURLRequest requestWithURL:self.user.profileImage];
             [self.profileImageView setImageWithURLRequest:profileImageRequest placeholderImage:nil
@@ -78,7 +81,6 @@
         
         [self getUserTweets];
     }];
-
 }
 
 - (void)getUserTweets {
@@ -107,14 +109,29 @@
     return cell;
 }
 
-/*
+- (void)didTweet:(Tweet *)tweet {
+    [self.tweets insertObject:tweet atIndex:0];
+    [self.tableView reloadData];
+//    [self getTimeline];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+    }
+    if ([sender isKindOfClass:[TweetCell class]]) {
+        TweetCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        Tweet *tweet = self.tweets[indexPath.row];
+        
+        SingleTweetViewController *singleTweetViewController = [segue destinationViewController];
+        singleTweetViewController.tweet = tweet;
+    }
 }
-*/
 
 @end

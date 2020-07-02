@@ -104,7 +104,7 @@
     if ([sender isKindOfClass:[TweetCell class]]) {
         TweetCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        NSDictionary *tweet = self.tweets[indexPath.row];
+        Tweet *tweet = self.tweets[indexPath.row];
         
         SingleTweetViewController *singleTweetViewController = [segue destinationViewController];
         singleTweetViewController.tweet = tweet;

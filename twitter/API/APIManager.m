@@ -97,7 +97,7 @@ static NSString * const consumerSecret = @"pXUaMjlu6wtxRkWVercGvyKszvtOyUaYZlBya
     }];
 }
 
-- (void)replyTweet:(Tweet *)tweet withText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion{
+- (void)replyTweet:(Tweet *)tweet withText:(NSString *)text completion:(void (^)(Tweet *, NSError *))completion {
     NSString *urlString = @"1.1/statuses/update.json";
     NSDictionary *parameters = @{@"status": text, @"in_reply_to_status_id": tweet.idStr};
     

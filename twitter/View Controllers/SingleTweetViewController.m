@@ -8,6 +8,7 @@
 
 #import "SingleTweetViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "ComposeViewController.h"
 #import "APIManager.h"
 
 @interface SingleTweetViewController ()
@@ -40,6 +41,7 @@
     self.retweetButton.selected = self.tweet.retweeted;
     
     // Profile image request
+    self.profileImageView.layer.cornerRadius = 10;
     self.profileImageView.image = [UIImage imageNamed:@"profile-Icon"];
     NSURLRequest *profileImageRequest = [NSURLRequest requestWithURL:self.tweet.user.profileImage];
     [self.profileImageView setImageWithURLRequest:profileImageRequest placeholderImage:nil
@@ -112,14 +114,15 @@
 }
 
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    UINavigationController *navigationController = [segue destinationViewController];
+    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+    
+    composeController.tweet = self.tweet; 
 }
-*/
+
 
 @end

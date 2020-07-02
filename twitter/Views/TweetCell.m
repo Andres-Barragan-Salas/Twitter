@@ -19,6 +19,16 @@
 
 - (void)initCellWithTweet:(Tweet *)tweet {
     self.tweet = tweet;
+    
+    // Set retweeted legend
+    if (tweet.retweetedByUser) {
+        self.retweetUser.text = [NSString stringWithFormat:@"%@ Retweeted", tweet.retweetedByUser.name];
+    }
+    else {
+        [self.retweetImage removeFromSuperview];
+        [self.retweetUser removeFromSuperview];
+    }
+    
     self.createdAtLabel.text = [NSString stringWithFormat:@"·  %@", tweet.timeAgoString];
     self.contentTextLabel.text = tweet.text;
     self.favoriteCountLabel.text = [@(tweet.favoriteCount) stringValue];
@@ -29,6 +39,7 @@
     self.retweetButton.selected = self.tweet.retweeted;
     
     // Profile image request
+    self.profileImageView.layer.cornerRadius = 10;
     self.profileImageView.image = [UIImage imageNamed:@"profile-Icon"];
     NSURLRequest *profileImageRequest = [NSURLRequest requestWithURL:tweet.user.profileImage];
     [self.profileImageView setImageWithURLRequest:profileImageRequest placeholderImage:nil
