@@ -31,6 +31,7 @@
     
     if(self.tweet) {
         self.sendButton.title = @"Reply";
+        self.tweetContent.text = [NSString stringWithFormat:@"%@ ", self.tweet.user.screenName];
     }
     
     [self fetchUserInfo];

@@ -14,8 +14,9 @@
 #import "SingleTweetViewController.h"
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "UserViewController.h"
 
-@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *tweets;
@@ -71,15 +72,14 @@
     
     Tweet *tweet = self.tweets[indexPath.row];
     
+    cell.delegate = self;
     [cell initCellWithTweet:tweet];
     
     return cell; 
 }
 
 - (void)didTweet:(Tweet *)tweet {
-    [self.tweets insertObject:tweet atIndex:0];
-    [self.tableView reloadData];
-//    [self getTimeline];
+    [self getTimeline];
 }
 
 - (IBAction)tapLogout:(id)sender {
@@ -90,6 +90,14 @@
     appDelegate.window.rootViewController = loginViewController;
     
     [[APIManager shared] logout];
+}
+
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
+
+- (void)replyWithTweetCell:(Tweet *)tweet {
+    [self performSegueWithIdentifier:@"replySegue" sender:tweet];
 }
 
 #pragma mark - Navigation
@@ -109,7 +117,17 @@
         SingleTweetViewController *singleTweetViewController = [segue destinationViewController];
         singleTweetViewController.tweet = tweet;
     }
+    if ([segue.identifier isEqual:@"profileSegue"]) {
+        UserViewController *userViewController = [segue destinationViewController];
+        userViewController.user = sender;
+    }
+    if ([segue.identifier isEqual:@"replySegue"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+        
+        composeController.tweet = sender;
+    }
 }
-
 
 @end

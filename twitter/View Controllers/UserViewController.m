@@ -9,12 +9,14 @@
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
 #import "SingleTweetViewController.h"
+#import "LoginViewController.h"
 #import "UserViewController.h"
+#import "AppDelegate.h"
 #import "TweetCell.h"
 #import "APIManager.h"
 #import "User.h"
 
-@interface UserViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface UserViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UIImageView *bannerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
@@ -24,8 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *followingCount;
 @property (weak, nonatomic) IBOutlet UILabel *followersCount;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
 @property (nonatomic, strong) NSMutableArray *tweets;
-@property (nonatomic, strong) User *user;
 
 @end
 
@@ -37,50 +39,77 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    [self fetchUserInfo];
+    if(self.user == nil) {
+        [self fetchUserInfo];
+    }
+    else {
+        [self setUserInfo];
+        [self getUserTweets];
+        self.navigationItem.title = self.user.name;
+    }
 }
 
 - (void)fetchUserInfo {
     [[APIManager shared] getProfileInfo:^(User *user, NSError *error) {
         if (user) {
             self.user = user;
-            
-            self.userNameLabel.text = self.user.name;
-            self.userScreenNameLabel.text = self.user.screenName;
-            self.tweetCountLabel.text = [self.user.tweetsCount stringValue];
-            self.followingCount.text = [self.user.followingCount stringValue];
-            self.followersCount.text = [self.user.followersCount stringValue];
-            
-            // Profile image request
-            self.profileImageView.layer.cornerRadius = 10;
-            self.profileImageView.image = [UIImage imageNamed:@"profile-Icon"];
-            NSURLRequest *profileImageRequest = [NSURLRequest requestWithURL:self.user.profileImage];
-            [self.profileImageView setImageWithURLRequest:profileImageRequest placeholderImage:nil
-            success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
-                if (imageResponse) {
-                    self.profileImageView.alpha = 0.0;
-                    self.profileImageView.image = image;
-                    
-                    [UIView animateWithDuration:0.3 animations:^{
-                        self.profileImageView.alpha = 1.0;
-                    }];
-                }
-                else {
-                    self.profileImageView.image = image;
-                }
-            }
-            failure:NULL];
-            
-            // Banner image request
-            self.bannerImageView.image = nil;
-            NSURLRequest *bannerImageRequest = [NSURLRequest requestWithURL:self.user.profileBanner];
-            [self.bannerImageView setImageWithURLRequest:bannerImageRequest placeholderImage:nil success:NULL failure:NULL];
+            [self setUserInfo];
         } else {
             NSLog(@"Error getting user: %@", error.localizedDescription);
         }
         
         [self getUserTweets];
     }];
+}
+
+- (void) setUserInfo {
+    self.userNameLabel.text = self.user.name;
+    self.userScreenNameLabel.text = self.user.screenName;
+    
+    self.followingCount.text = [self.user.followingCount stringValue];
+    
+    NSString *tweetsCount = [self.user.tweetsCount stringValue];
+    if([self.user.tweetsCount intValue] > 1000000) {
+        tweetsCount = [NSString stringWithFormat:@"%.1f M", ([self.user.tweetsCount doubleValue]/1000000)];
+    }
+    else if ([self.user.tweetsCount intValue] > 10000) {
+        tweetsCount = [NSString stringWithFormat:@"%.1f K", ([self.user.tweetsCount doubleValue]/1000)];
+    }
+    self.tweetCountLabel.text = tweetsCount;
+    
+    NSString *followersCount = [self.user.followersCount stringValue];
+    if([self.user.followersCount intValue] > 1000000) {
+        followersCount = [NSString stringWithFormat:@"%.1f M", ([self.user.followersCount doubleValue]/1000000)];
+    }
+    else if ([self.user.followersCount intValue] > 10000) {
+        followersCount = [NSString stringWithFormat:@"%.1f K", ([self.user.followersCount doubleValue]/1000)];
+    }
+    self.followersCount.text = followersCount;
+    
+    // Profile image request
+    self.profileImageView.layer.cornerRadius = 10;
+    self.profileImageView.image = [UIImage imageNamed:@"profile-Icon"];
+    NSURLRequest *profileImageRequest = [NSURLRequest requestWithURL:self.user.profileImage];
+    [self.profileImageView setImageWithURLRequest:profileImageRequest placeholderImage:nil
+    success:^(NSURLRequest *imageRequest, NSHTTPURLResponse *imageResponse, UIImage *image) {
+        if (imageResponse) {
+            self.profileImageView.alpha = 0.0;
+            self.profileImageView.image = image;
+            
+            [UIView animateWithDuration:0.3 animations:^{
+                self.profileImageView.alpha = 1.0;
+            }];
+        }
+        else {
+            self.profileImageView.image = image;
+        }
+    }
+    failure:NULL];
+    
+    // Banner image request
+    self.bannerImageView.image = nil;
+    NSURLRequest *bannerImageRequest = [NSURLRequest requestWithURL:self.user.profileBanner];
+    [self.bannerImageView setImageWithURLRequest:bannerImageRequest placeholderImage:nil success:NULL failure:NULL];
 }
 
 - (void)getUserTweets {
@@ -104,15 +133,26 @@
     
     Tweet *tweet = self.tweets[indexPath.row];
     
+    cell.delegate = self;
     [cell initCellWithTweet:tweet];
     
     return cell;
 }
 
 - (void)didTweet:(Tweet *)tweet {
-    [self.tweets insertObject:tweet atIndex:0];
-    [self.tableView reloadData];
-//    [self getTimeline];
+//    [self.tweets insertObject:tweet atIndex:0];
+//    [self.tableView reloadData];
+    [self getUserTweets];
+}
+
+- (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
+    UserViewController *userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserViewController"];
+    userViewController.user = user;
+    [self.navigationController pushViewController:userViewController animated:YES];
+}
+
+- (void)replyWithTweetCell:(Tweet *)tweet {
+    [self performSegueWithIdentifier:@"replySegue" sender:tweet];
 }
 
 #pragma mark - Navigation
@@ -131,6 +171,13 @@
         
         SingleTweetViewController *singleTweetViewController = [segue destinationViewController];
         singleTweetViewController.tweet = tweet;
+    }
+    if ([segue.identifier isEqual:@"replySegue"]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        composeController.delegate = self;
+        
+        composeController.tweet = sender;
     }
 }
 

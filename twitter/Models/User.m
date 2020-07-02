@@ -21,7 +21,7 @@
         self.followingCount = dictionary[@"friends_count"];
 //        self.lastTweet = [[Tweet alloc] initWithDictionary:dictionary[@"status"]];
         
-        self.profileImage = [NSURL URLWithString:dictionary[@"profile_image_url_https"]];
+        self.profileImage = [NSURL URLWithString:[dictionary[@"profile_image_url_https"] stringByReplacingOccurrencesOfString:@"_normal" withString:@""]];
         self.profileBanner = [NSURL URLWithString:dictionary[@"profile_banner_url"]];
     }
     return self; 

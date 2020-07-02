@@ -15,6 +15,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileImageView addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profileImageView setUserInteractionEnabled:YES];
 }
 
 - (void)initCellWithTweet:(Tweet *)tweet {
@@ -31,12 +34,22 @@
     
     self.createdAtLabel.text = [NSString stringWithFormat:@"·  %@", tweet.timeAgoString];
     self.contentTextLabel.text = tweet.text;
-    self.favoriteCountLabel.text = [@(tweet.favoriteCount) stringValue];
-    self.retweetCountLabel.text = [@(tweet.retweetCount) stringValue];
     self.userNameLabel.text = tweet.user.name;
     self.userScreenNameLabel.text = tweet.user.screenName;
     self.favoriteButton.selected = self.tweet.favorited;
     self.retweetButton.selected = self.tweet.retweeted;
+    
+    NSString *favoriteCount = [@(tweet.favoriteCount) stringValue];
+    if (tweet.favoriteCount > 1000) {
+        favoriteCount = [NSString stringWithFormat:@"%.1f K", (tweet.favoriteCount/1000.00)];
+    }
+    self.favoriteCountLabel.text = favoriteCount;
+    
+    NSString *retweetCount = [@(tweet.retweetCount) stringValue];
+    if (tweet.retweetCount > 1000) {
+        retweetCount = [NSString stringWithFormat:@"%.1f K", (tweet.retweetCount/1000.00)];
+    }
+    self.retweetCountLabel.text = retweetCount;
     
     // Profile image request
     self.profileImageView.layer.cornerRadius = 10;
@@ -115,6 +128,14 @@
     }
     
     self.retweetCountLabel.text = [@(self.tweet.retweetCount) stringValue];
+}
+
+- (IBAction)didTapReply:(id)sender {
+    [self.delegate replyWithTweetCell:self.tweet];
+}
+
+- (void) didTapUserProfile:(UIGestureRecognizer *)sender {
+    [self.delegate tweetCell:self didTap:self.tweet.user];
 }
 
 @end

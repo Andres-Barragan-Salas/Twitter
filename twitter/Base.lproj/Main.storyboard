@@ -56,7 +56,7 @@
         <!--Me-->
         <scene sceneID="Vlh-gj-oqP">
             <objects>
-                <viewController id="xcO-eC-qVb" customClass="UserViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="UserViewController" id="xcO-eC-qVb" customClass="UserViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oZh-Fd-fjP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -68,7 +68,11 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="247"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mWA-d1-DWN">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="19S-Wm-o05">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="185.5"/>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </view>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.59999999999999998" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="mWA-d1-DWN">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="185.5"/>
                                             <color key="backgroundColor" systemColor="systemGray2Color" red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </imageView>
@@ -180,6 +184,7 @@
                                     <constraints>
                                         <constraint firstItem="daB-ff-zA3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tOp-hk-AKE" secondAttribute="trailing" constant="15" id="2Ax-Ni-1IC"/>
                                         <constraint firstItem="mWA-d1-DWN" firstAttribute="height" secondItem="f3i-sj-WQi" secondAttribute="height" multiplier="3:4" id="3rI-py-OQb"/>
+                                        <constraint firstItem="19S-Wm-o05" firstAttribute="centerY" secondItem="mWA-d1-DWN" secondAttribute="centerY" id="4hA-4V-hzM"/>
                                         <constraint firstItem="DIi-lg-nBm" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f3i-sj-WQi" secondAttribute="leading" constant="10" id="5g4-Wb-gEc"/>
                                         <constraint firstItem="PEc-5q-f2A" firstAttribute="centerY" secondItem="mWA-d1-DWN" secondAttribute="centerY" multiplier="3:4" id="6ec-zg-3rt"/>
                                         <constraint firstItem="qsD-NX-enH" firstAttribute="top" secondItem="mWA-d1-DWN" secondAttribute="bottom" constant="15" id="71u-eu-Udt"/>
@@ -195,6 +200,7 @@
                                         <constraint firstItem="brh-og-beZ" firstAttribute="centerX" secondItem="f3i-sj-WQi" secondAttribute="centerX" multiplier="2:3" id="JeG-G0-pgW"/>
                                         <constraint firstItem="p18-EI-LWc" firstAttribute="top" secondItem="qsD-NX-enH" secondAttribute="bottom" constant="1" id="Ozq-kM-4hK"/>
                                         <constraint firstItem="tOp-hk-AKE" firstAttribute="leading" secondItem="brh-og-beZ" secondAttribute="trailing" constant="15" id="SPg-Oy-yoU"/>
+                                        <constraint firstItem="19S-Wm-o05" firstAttribute="centerX" secondItem="mWA-d1-DWN" secondAttribute="centerX" id="TEH-eV-Kt4"/>
                                         <constraint firstItem="iOM-OG-izm" firstAttribute="top" secondItem="mWA-d1-DWN" secondAttribute="bottom" constant="15" id="U6h-4m-ZzD"/>
                                         <constraint firstAttribute="trailing" secondItem="mWA-d1-DWN" secondAttribute="trailing" id="VQ7-x1-m4o"/>
                                         <constraint firstItem="PEc-5q-f2A" firstAttribute="centerX" secondItem="f3i-sj-WQi" secondAttribute="centerX" id="cVx-Hx-8ri"/>
@@ -204,9 +210,11 @@
                                         <constraint firstItem="DIi-lg-nBm" firstAttribute="top" secondItem="PEc-5q-f2A" secondAttribute="bottom" constant="15" id="hqI-92-54U"/>
                                         <constraint firstItem="tOp-hk-AKE" firstAttribute="top" secondItem="mWA-d1-DWN" secondAttribute="bottom" constant="15" id="lJM-Nn-5vO"/>
                                         <constraint firstItem="sy2-yB-LxG" firstAttribute="top" secondItem="DIi-lg-nBm" secondAttribute="bottom" constant="1" id="lny-U0-l5A"/>
+                                        <constraint firstItem="19S-Wm-o05" firstAttribute="height" secondItem="mWA-d1-DWN" secondAttribute="height" id="opB-Ct-0yq"/>
                                         <constraint firstItem="DIi-lg-nBm" firstAttribute="centerX" secondItem="f3i-sj-WQi" secondAttribute="centerX" id="otv-aQ-rvE"/>
                                         <constraint firstItem="mWA-d1-DWN" firstAttribute="top" secondItem="f3i-sj-WQi" secondAttribute="top" id="pgQ-i5-4pV"/>
                                         <constraint firstItem="avz-m7-bzB" firstAttribute="leading" secondItem="brh-og-beZ" secondAttribute="trailing" constant="15" id="qG5-9m-BCR"/>
+                                        <constraint firstItem="19S-Wm-o05" firstAttribute="width" secondItem="mWA-d1-DWN" secondAttribute="width" id="qRA-JF-tSv"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="sy2-yB-LxG" secondAttribute="trailing" constant="10" id="qjR-xM-gMd"/>
                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qsD-NX-enH" secondAttribute="trailing" constant="15" id="raZ-x8-qBc"/>
                                         <constraint firstItem="p18-EI-LWc" firstAttribute="leading" secondItem="daB-ff-zA3" secondAttribute="trailing" constant="15" id="sHp-xx-5WT"/>
@@ -334,7 +342,7 @@
                                                     </constraints>
                                                     <state key="normal" image="reply-icon"/>
                                                     <connections>
-                                                        <segue destination="USi-if-FEj" kind="presentation" id="lwq-4F-JOD"/>
+                                                        <action selector="didTapReply:" destination="hng-vl-qch" eventType="touchUpInside" id="VyC-K6-zGh"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -415,6 +423,7 @@
                         <outlet property="tweetCountLabel" destination="iOM-OG-izm" id="zz5-iA-Ed9"/>
                         <outlet property="userNameLabel" destination="DIi-lg-nBm" id="3aY-eh-TDA"/>
                         <outlet property="userScreenNameLabel" destination="sy2-yB-LxG" id="Edc-f8-HzE"/>
+                        <segue destination="USi-if-FEj" kind="presentation" identifier="replySegue" id="bzW-fO-akt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bWQ-tq-PLm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -447,10 +456,14 @@
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9jW-UX-71M">
                                                     <rect key="frame" x="10" y="27" width="65" height="65"/>
                                                     <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <gestureRecognizers/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="65" id="bwH-Rd-7nR"/>
                                                         <constraint firstAttribute="width" constant="65" id="eBm-tz-x0T"/>
                                                     </constraints>
+                                                    <connections>
+                                                        <outletCollection property="gestureRecognizers" destination="uPG-Yh-fgR" appends="YES" id="Pdg-7E-PlE"/>
+                                                    </connections>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="user: name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="0j5-fp-Ilf">
                                                     <rect key="frame" x="85" y="27" width="82" height="18"/>
@@ -551,7 +564,7 @@
                                                     </constraints>
                                                     <state key="normal" image="reply-icon"/>
                                                     <connections>
-                                                        <segue destination="USi-if-FEj" kind="presentation" id="S4R-8K-VCh"/>
+                                                        <action selector="didTapReply:" destination="r6t-2Z-lBS" eventType="touchUpInside" id="qVS-IT-bd8"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -630,11 +643,14 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="Mdv-Su-h2p" id="k27-Eg-yYe"/>
+                        <segue destination="xcO-eC-qVb" kind="show" identifier="profileSegue" id="lg5-YO-iTY"/>
+                        <segue destination="USi-if-FEj" kind="presentation" identifier="replySegue" id="hnd-5c-w0d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oQh-hN-GQg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="uPG-Yh-fgR"/>
             </objects>
-            <point key="canvasLocation" x="2599.1999999999998" y="36.431784107946029"/>
+            <point key="canvasLocation" x="2598" y="36"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="Qz0-qs-oFb">
@@ -1012,8 +1028,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="aFI-ek-PdO"/>
-        <segue reference="4Tb-lO-KaX"/>
+        <segue reference="iMd-Vz-fhW"/>
+        <segue reference="bzW-fO-akt"/>
+        <segue reference="lg5-YO-iTY"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="TwitterLogoBlue" width="200" height="200"/>

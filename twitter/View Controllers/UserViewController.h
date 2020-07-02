@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UserViewController : UIViewController
 
+@property (nonatomic, strong) User *user;
+
 @end
 
 NS_ASSUME_NONNULL_END
