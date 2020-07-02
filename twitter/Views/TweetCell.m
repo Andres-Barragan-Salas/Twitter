@@ -25,11 +25,17 @@
     
     // Set retweeted legend
     if (tweet.retweetedByUser) {
+        [self.retweetImage setHidden:NO];
+        [self.retweetUser setHidden:NO];
+        [self.retweetConstraint setActive:YES];
+//        [self.retweetConstraint setPriority:1000];
+//        [self.cellConstraint setPriority:250];
         self.retweetUser.text = [NSString stringWithFormat:@"%@ Retweeted", tweet.retweetedByUser.name];
     }
     else {
-        [self.retweetImage removeFromSuperview];
-        [self.retweetUser removeFromSuperview];
+        [self.retweetConstraint setActive:NO];
+        [self.retweetImage setHidden:YES];
+        [self.retweetUser setHidden:YES];
     }
     
     self.createdAtLabel.text = [NSString stringWithFormat:@"·  %@", tweet.timeAgoString];

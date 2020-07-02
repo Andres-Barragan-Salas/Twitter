@@ -9,6 +9,7 @@
 #import "SingleTweetViewController.h"
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
+#import "UserViewController.h"
 #import "APIManager.h"
 
 @interface SingleTweetViewController ()
@@ -118,10 +119,16 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    UINavigationController *navigationController = [segue destinationViewController];
-    ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
-    
-    composeController.tweet = self.tweet; 
+    if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+        UINavigationController *navigationController = [segue destinationViewController];
+        ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
+        
+        composeController.tweet = self.tweet;
+    }
+    else {
+        UserViewController *userViewController = [segue destinationViewController];
+        userViewController.user = self.tweet.user;
+    }
 }
 
 

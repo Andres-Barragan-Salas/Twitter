@@ -16,14 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 // MARK: Properties
 @property (nonatomic, strong) NSString *idStr; // For favoriting, retweeting & replying
 @property (nonatomic, strong) NSString *text; // Text content of tweet
-@property (nonatomic) int replyCount;
 @property (nonatomic) int favoriteCount; // Update favorite count label
 @property (nonatomic) BOOL favorited; // Configure favorite button
 @property (nonatomic) int retweetCount; // Update favorite count label
 @property (nonatomic) BOOL retweeted; // Configure retweet button
 @property (nonatomic, strong) User *user; // Contains Tweet author's name/screenname
 @property (nonatomic, strong) NSString *createdAtString; // Display date
-@property (nonatomic) NSString *timeAgoString; 
+@property (nonatomic) NSString *timeAgoString; // Display time ssince created at
+@property (nonatomic, strong) NSURL *mediaURL; // Images embedded in tweet
 
 // For Retweets
 @property (nonatomic, strong) User *retweetedByUser;  // user who retweeted if tweet is retweet
