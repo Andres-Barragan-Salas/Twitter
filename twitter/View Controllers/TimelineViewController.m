@@ -79,7 +79,9 @@
 }
 
 - (void)didTweet:(Tweet *)tweet {
-    [self getTimeline];
+    [self.tweets insertObject:tweet atIndex:0];
+    [self.tableView reloadData];
+//    [self getTimeline];
 }
 
 - (IBAction)tapLogout:(id)sender {

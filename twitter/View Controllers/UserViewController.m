@@ -139,11 +139,7 @@
     return cell;
 }
 
-- (void)didTweet:(Tweet *)tweet {
-//    [self.tweets insertObject:tweet atIndex:0];
-//    [self.tableView reloadData];
-    [self getUserTweets];
-}
+- (void)didTweet:(Tweet *)tweet {}
 
 - (void)tweetCell:(TweetCell *)tweetCell didTap:(User *)user{
     UserViewController *userViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"UserViewController"];
