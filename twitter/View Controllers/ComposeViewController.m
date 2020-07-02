@@ -10,6 +10,8 @@
 #import "UIImageView+AFNetworking.h"
 #import "APIManager.h"
 
+#define CHARACTER_LIMIT ((int) 280)
+
 @interface ComposeViewController () <UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *sendButton;
@@ -34,6 +36,7 @@
         self.tweetContent.text = [NSString stringWithFormat:@"%@ ", self.tweet.user.screenName];
     }
     
+    self.charCount.text = [@(CHARACTER_LIMIT - self.tweetContent.text.length) stringValue];
     [self fetchUserInfo];
     [self.tweetContent becomeFirstResponder];
 }
@@ -71,14 +74,11 @@
     }];
 }
 
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    int characterLimit = 140;
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{NSString *newText = [self.tweetContent.text stringByReplacingCharactersInRange:range withString:text];
 
-    NSString *newText = [self.tweetContent.text stringByReplacingCharactersInRange:range withString:text];
+    self.charCount.text = [@(CHARACTER_LIMIT - newText.length) stringValue];
 
-    self.charCount.text = [@(characterLimit - newText.length) stringValue];
-
-    return newText.length < characterLimit;
+    return newText.length < CHARACTER_LIMIT;
 }
 
 - (IBAction)closeAction:(id)sender {

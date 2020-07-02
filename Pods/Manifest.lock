@@ -17,23 +17,27 @@ PODS:
   - BDBOAuth1Manager (2.0.0):
     - AFNetworking/NSURLSession (~> 3.0.0)
   - DateTools (2.0.0)
+  - ResponsiveLabel (1.0.11)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
   - DateTools
+  - ResponsiveLabel (~> 1.0.10)
 
 SPEC REPOS:
   trunk:
     - AFNetworking
     - BDBOAuth1Manager
     - DateTools
+    - ResponsiveLabel
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
   DateTools: 933ac9c490f21f92127cf690ccd8c397e0126caf
+  ResponsiveLabel: 9e31c425ed082481faf2360689243bb0ec8f8b22
 
-PODFILE CHECKSUM: a01562b42d6ea4d69e9f0d5557bdd30ba9a863d2
+PODFILE CHECKSUM: d11a01a51ddb46e99a3b3729c59a2c4909eec844
 
 COCOAPODS: 1.9.3

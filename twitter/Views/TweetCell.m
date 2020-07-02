@@ -55,6 +55,18 @@
     }
     self.retweetCountLabel.text = retweetCount;
     
+    // Detect URL, usernames, hashtags
+    self.contentTextLabel.userInteractionEnabled = YES;
+    PatternTapResponder urlTapAction = ^(NSString *tappedString) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tappedString]];
+    };
+    [self.contentTextLabel enableURLDetectionWithAttributes:
+    @{NSForegroundColorAttributeName:[UIColor systemBlueColor],RLTapResponderAttributeName:urlTapAction}];
+    [self.contentTextLabel enableHashTagDetectionWithAttributes:
+     @{NSForegroundColorAttributeName:[UIColor systemBlueColor]}];
+    [self.contentTextLabel enableUserHandleDetectionWithAttributes:
+    @{NSForegroundColorAttributeName:[UIColor systemBlueColor]}];
+    
     // Profile image request
     self.profileImageView.layer.cornerRadius = 10;
     self.profileImageView.image = [UIImage imageNamed:@"profile-Icon"];

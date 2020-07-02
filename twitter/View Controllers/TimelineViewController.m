@@ -19,6 +19,7 @@
 @interface TimelineViewController () <ComposeViewControllerDelegate, UITableViewDataSource, UITableViewDelegate, TweetCellDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic, strong) NSMutableArray *tweets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
@@ -38,6 +39,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    [self.activityIndicator startAnimating];
     [self getTimeline];
     
     self.refreshControl = [[UIRefreshControl alloc] init];
@@ -58,6 +60,8 @@
             } else {
                 NSLog(@"😫😫😫 Error getting home timeline: %@", error.localizedDescription);
             }
+            
+            [self.activityIndicator stopAnimating];
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
         }];

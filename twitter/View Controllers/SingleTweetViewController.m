@@ -10,6 +10,7 @@
 #import "UIImageView+AFNetworking.h"
 #import "ComposeViewController.h"
 #import "UserViewController.h"
+#import <ResponsiveLabel.h>
 #import "APIManager.h"
 
 @interface SingleTweetViewController ()
@@ -17,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *userScreenNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UILabel *contentTextLabel;
+@property (weak, nonatomic) IBOutlet ResponsiveLabel *contentTextLabel;
 @property (weak, nonatomic) IBOutlet UILabel *createdAtLabel;
 @property (weak, nonatomic) IBOutlet UILabel *retweetCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *favoriteCountLabel;
@@ -90,6 +91,18 @@
         [self.mediaConstraint setActive:NO];
         [self.mediaImageView setHidden:YES];
     }
+    
+    // Detect URL, usernames, hashtags
+    self.contentTextLabel.userInteractionEnabled = YES;
+    PatternTapResponder urlTapAction = ^(NSString *tappedString) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:tappedString]];
+    };
+    [self.contentTextLabel enableURLDetectionWithAttributes:
+    @{NSForegroundColorAttributeName:[UIColor systemBlueColor],RLTapResponderAttributeName:urlTapAction}];
+    [self.contentTextLabel enableHashTagDetectionWithAttributes:
+     @{NSForegroundColorAttributeName:[UIColor systemBlueColor]}];
+    [self.contentTextLabel enableUserHandleDetectionWithAttributes:
+    @{NSForegroundColorAttributeName:[UIColor systemBlueColor]}];
 }
 
 - (IBAction)didTapFavorite:(id)sender {

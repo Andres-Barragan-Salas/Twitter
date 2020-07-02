@@ -26,7 +26,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *followingCount;
 @property (weak, nonatomic) IBOutlet UILabel *followersCount;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet UIBarButtonItem *logoutButton;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic, strong) NSMutableArray *tweets;
 
 @end
@@ -39,6 +40,7 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
+    [self.activityIndicator startAnimating];
     if(self.user == nil) {
         [self fetchUserInfo];
     }
@@ -47,6 +49,10 @@
         [self getUserTweets];
         self.navigationItem.title = self.user.name;
     }
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(getUserTweets) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
 }
 
 - (void)fetchUserInfo {
@@ -116,11 +122,12 @@
     [[APIManager shared] getUserTimeline:self.user withCompletion:^(NSArray *tweets, NSError *error) {
             if (tweets) {
                 self.tweets = [NSMutableArray arrayWithArray:tweets];
-//                NSLog(@"😎😎😎 Successfully loaded user timeline");
             } else {
                 NSLog(@"😫😫😫 Error getting user timeline: %@", error.localizedDescription);
             }
             [self.tableView reloadData];
+            [self.activityIndicator stopAnimating];
+            [self.refreshControl endRefreshing];
         }];
 }
 

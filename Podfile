@@ -9,6 +9,7 @@ target 'twitter' do
   pod 'AFNetworking'
   pod 'BDBOAuth1Manager'
   pod 'DateTools'
+  pod 'ResponsiveLabel', '~> 1.0.10'
   
 end
 
