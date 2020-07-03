@@ -40,7 +40,7 @@
 		2B77D18724AD252F008AB67F /* UserViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		2B77D18824AD252F008AB67F /* UserViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		43D6142D6F34C1AE98EE4951 /* libPods-twitter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-twitter.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6AD278D520BC4B950085BC29 /* twitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = twitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AD278D520BC4B950085BC29 /* Tweets-A.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tweets-A.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AD278D820BC4B950085BC29 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6AD278D920BC4B950085BC29 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6AD278DF20BC4B950085BC29 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 		6AD278D620BC4B950085BC29 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6AD278D520BC4B950085BC29 /* twitter.app */,
+				6AD278D520BC4B950085BC29 /* Tweets-A.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -191,7 +191,7 @@
 			);
 			name = twitter;
 			productName = twitter;
-			productReference = 6AD278D520BC4B950085BC29 /* twitter.app */;
+			productReference = 6AD278D520BC4B950085BC29 /* Tweets-A.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -442,7 +442,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.twitter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Tweets-A";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -460,7 +460,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.twitter;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Tweets-A";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
