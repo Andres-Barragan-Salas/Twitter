@@ -10,7 +10,7 @@ https://paper.dropbox.com/doc/Twitter--ADuVCVvwop_njSNAbUU96Q2VAQ-g255BPX3K4X7G0
 
 **Tweets-A** is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: **X** hours spent in total
+Time spent: **32** hours spent in total
 
 ## User Stories
 
@@ -57,7 +57,7 @@ The following **additional** features are implemented:
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
 1. Loading more cells when reaching the bottom of the feed.
-2. Resizing an image
+2. Resizing an image when pulling down
 
 ## Video Walkthrough
 
@@ -66,11 +66,11 @@ Here's a walkthrough of implemented user stories:
 <img src='http://g.recordit.co/KD9pBwJfHZ.gif' title='Video Walkthrough 1' width='' alt='Video Walkthrough 1' />
 <img src='http://g.recordit.co/3YJVm0pXpD.gif' title='Video Walkthrough 2' width='' alt='Video Walkthrough 2' />
 
-GIF created with [LiceCap](http://www.cockos.com/licecap/).
+GIF created with [RecordIt](https://recordit.co/).
 
 ## Notes
 
-To display optional elements of a tweet (images, retweet legend, etc.) auto layout constraints had to be handled programatically, which was a challenge to figure out and there is no information about it in the guides. Creating a segue to the same view controller also has to be handled programatically but it is quite useful (used to navigate from user to user with timelines).
+To display optional elements of a tweet (images, retweet legend, etc.) auto layout constraints had to be handled programatically, which was a challenge to figure out, there's not enough information about it in the guides. Creating a segue to the same view controller also has to be handled programatically, but it is quite useful (used to navigate from user to user with timelines).
 
 ## Credits
 
