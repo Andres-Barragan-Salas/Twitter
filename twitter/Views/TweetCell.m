@@ -10,6 +10,8 @@
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
 
+#define ANIMATION_DURATION ((double) 0.3)
+
 @implementation TweetCell
 
 - (void)awakeFromNib {
@@ -77,7 +79,7 @@
             self.profileImageView.alpha = 0.0;
             self.profileImageView.image = image;
             
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:ANIMATION_DURATION animations:^{
                 self.profileImageView.alpha = 1.0;
             }];
         }
@@ -100,7 +102,7 @@
                 self.mediaImageView.alpha = 0.0;
                 self.mediaImageView.image = image;
 
-                [UIView animateWithDuration:0.3 animations:^{
+                [UIView animateWithDuration:ANIMATION_DURATION animations:^{
                     self.mediaImageView.alpha = 1.0;
                 }];
             }
@@ -117,9 +119,14 @@
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
+//    [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+    UIColor *intitialColor = self.backgroundColor;
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        self.backgroundColor = UIColor.systemGray6Color;
+        self.backgroundColor = intitialColor;
+    }];
 }
 
 - (IBAction)didTapFavorite:(id)sender {
@@ -175,10 +182,19 @@
 }
 
 - (IBAction)didTapReply:(id)sender {
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        UIButton *replyButton = sender;
+        replyButton.alpha = 0.5;
+        replyButton.alpha = 1;
+    }];
     [self.delegate replyWithTweetCell:self.tweet];
 }
 
 - (void) didTapUserProfile:(UIGestureRecognizer *)sender {
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        self.profileImageView.alpha = 0.5;
+        self.profileImageView.alpha = 1;
+    }];
     [self.delegate tweetCell:self didTap:self.tweet.user];
 }
 

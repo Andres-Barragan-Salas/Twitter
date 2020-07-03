@@ -13,6 +13,8 @@
 #import <ResponsiveLabel.h>
 #import "APIManager.h"
 
+#define ANIMATION_DURATION ((double) 0.3)
+
 @interface SingleTweetViewController ()
 
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
@@ -54,7 +56,7 @@
             self.profileImageView.alpha = 0.0;
             self.profileImageView.image = image;
             
-            [UIView animateWithDuration:0.3 animations:^{
+            [UIView animateWithDuration:ANIMATION_DURATION animations:^{
                 self.profileImageView.alpha = 1.0;
             }];
         }
@@ -63,6 +65,7 @@
         }
     }
     failure:NULL];
+    [self.profileImageView setUserInteractionEnabled:YES];
     
     // Media image request
     self.mediaImageView.image = nil;
@@ -77,7 +80,7 @@
                 self.mediaImageView.alpha = 0.0;
                 self.mediaImageView.image = image;
 
-                [UIView animateWithDuration:0.3 animations:^{
+                [UIView animateWithDuration:ANIMATION_DURATION animations:^{
                     self.mediaImageView.alpha = 1.0;
                 }];
             }
@@ -132,6 +135,12 @@
 }
 
 - (IBAction)didTapRetweet:(id)sender {
+    UIButton *button = sender;
+    [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+        button.alpha = 0.5;
+        button.alpha = 1;
+    }];
+    
     [[APIManager shared] retweet:self.tweet remove:(BOOL *)self.tweet.retweeted completion:^(Tweet *tweet, NSError *error) {
              if(tweet){
                   NSLog(@"Successfully retweeted/unretweeted the following Tweet: %@", tweet.text);
@@ -162,13 +171,17 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([sender isKindOfClass:[UIBarButtonItem class]]) {
+    if ([sender isKindOfClass:[UIButton class]]) {
         UINavigationController *navigationController = [segue destinationViewController];
         ComposeViewController *composeController = (ComposeViewController*)navigationController.topViewController;
         
         composeController.tweet = self.tweet;
     }
     else {
+        [UIView animateWithDuration:ANIMATION_DURATION animations:^{
+            self.profileImageView.alpha = 0.5;
+            self.profileImageView.alpha = 1;
+        }];
         UserViewController *userViewController = [segue destinationViewController];
         userViewController.user = self.tweet.user;
     }
