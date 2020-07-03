@@ -32,10 +32,10 @@ The following **optional** features are implemented:
 - [x] User can view their profile in a *profile tab*
   - Contains the user header view: picture and tagline
   - Contains a section with the users basic stats: # tweets, # following, # followers
-  - [ ] Profile view should include that user's timeline
+  - [x] Profile view should include that user's timeline
 - [x] User should display the relative timestamp for each tweet 8m, 7h
 - [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count. Refer to [[this guide|unretweeting]] for help on implementing unretweeting.
-- [ ] Links in tweets are clickable.
+- [x] Links in tweets are clickable.
 - [x] User can tap the profile image in any tweet to see another user's profile
   - Contains the user header view: picture and tagline
   - Contains a section with the users basic stats: # tweets, # following, # followers
@@ -43,37 +43,42 @@ The following **optional** features are implemented:
 - [x] When composing, you should have a countdown for the number of characters remaining for the tweet (out of 280) (**1 point**)
 - [x] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [x] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet (**2 points**)
-- [ ] User sees embedded images in tweet if available
+- [x] User sees embedded images in tweet if available
 - [ ] User can switch between timeline, mentions, or profile view through a tab bar (**3 points**)
 - [ ] Profile Page: pulling down the profile page should blur and resize the header image. (**4 points**)
 
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Tweet displays a message if a Tweet is actually a retweet
+- [x] User names and hashtags are highlighted
+- [x] Reply button works on any tweet display
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. Loading more cells when reaching the bottom of the feed.
+2. Resizing an image
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='http://g.recordit.co/KD9pBwJfHZ.gif' title='Video Walkthrough 1' width='' alt='Video Walkthrough 1' />
+<img src='http://g.recordit.co/3YJVm0pXpD.gif' title='Video Walkthrough 2' width='' alt='Video Walkthrough 2' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+To display optional elements of a tweet (images, retweet legend, etc.) auto layout constraints had to be handled programatically, which was a challenge to figure out and there is no information about it in the guides. Creating a segue to the same view controller also has to be handled programatically but it is quite useful (used to navigate from user to user with timelines).
 
 ## Credits
 
 List an 3rd party libraries, icons, graphics, or other assets you used in your app.
 
 - [AFNetworking](https://github.com/AFNetworking/AFNetworking) - networking task library
+- [DateTools](https://github.com/MatthewYork/DateTools) - date format library
+- [ResponsiveLabel](hhttps://cocoapods.org/pods/ResponsiveLabel) - dynamic text within labels
 
 ## License
 
